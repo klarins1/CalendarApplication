@@ -49,7 +49,7 @@ namespace CalendarApplication.Controllers
             var existingEvent = _appservice.GetEventModels(updatedModel.name);
             if (existingEvent == null)
             {
-                return NotFound(new { message = $"Event '{updatedModel.name}' " });
+                return NotFound(new { message = $"Event '{updatedModel.name}' cannot be found." });
             }
 
             _appservice.UpdateEvent(updatedModel.name, updatedModel);
@@ -59,10 +59,11 @@ namespace CalendarApplication.Controllers
         [HttpDelete("{name}")]
         public ActionResult DeleteEvent(string name)
         {
+
             var existingEvent = _appservice.GetEventModels(name);
             if (existingEvent == null)
             {
-                return NotFound(new { message = $"Event '{name}' ay hindi nahanap sa database." });
+                return NotFound(new { message = $"Event '{name}' cannot be found." });
             }
 
             _appservice.DeleteEvent(name);
